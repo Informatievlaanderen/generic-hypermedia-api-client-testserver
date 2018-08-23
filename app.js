@@ -31,16 +31,19 @@ app.get('/api', (req, res) => {
             {
                 "hydra": "http://www.w3.org/ns/hydra/core#",
                 "dc": "http://purl.org/dc/terms/",
-                "dcat": "https://www.w3.org/ns/dcat#"
+                "dcat": "https://www.w3.org/ns/dcat#",
+                "hydra:apiDocumentation" : { "@type" : "@id"}
             }
         ],
         "@id": "/api",
-        "@type": "EntryPoint, Distribution",
-        "hydra:apiDocumentation": "/documentation",
+        "@type": ["EntryPoint", "Distribution"],
+        "hydra:apiDocumentation": "/api/documentation",
         "dc:issued": "2016-01-10",
         "dc:modified": "2018-07-24"
     };
     res.header("Content-Type", "application/ld+json");
+
+    //Send api documentation link via HTTP header
     //res.setHeader('Link', '<http://localhost:3001/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation"');
 
 
@@ -65,7 +68,7 @@ app.get('/api/documentation', (req, res) => {
                 }
             }
         ],
-        "@id": "http://localhost:3001/api/documentation",
+        "@id": "/api/documentation",
         "@type": "ApiDocumentation, Distribution",
         "hydra:title": "Voorbeeld Event API",
         "hydra:description": "Lorem ipsum dolor sit amet",
@@ -121,7 +124,7 @@ app.get('/api/documentation', (req, res) => {
 app.get('/api/pagination', (req, res) => {
     const doc = {
         "@context": "http://www.w3.org/ns/hydra/context.jsonld",
-        "@id": "http://localhost:3001/api/pagination",
+        "@id": "/api/pagination",
         "@type": "PartialCollection",
         "next": "/api/resource?page=4",
         "last": "/api/resource?page=50",
