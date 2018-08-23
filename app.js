@@ -3,7 +3,8 @@ const app = express();
 const negotiator = require('accept-language-negotiator');
 
 const PAGE_SIZE = 10;
-const baseUrl = process.argv.length < 3 ? 'http://localhost:3001/' : process.argv[2];
+const port = process.argv.length < 4 ? 3001 : process.argv[3];
+const baseUrl = process.argv.length < 3 ? 'http://localhost:' + port + '/' : process.argv[2];
 
 app.enable('etag')
 
@@ -13,7 +14,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Expose-Headers", "Link");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     //res.header("Cache-Control", "max-age=604800"); // 1 week
-    //res.header("Content-Type", "application/ld+json");
+    res.header("Content-Type", "application/ld+json");
     //res.set('Link', '<' + baseUrl + 'api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation"');
     next();
 });
