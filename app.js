@@ -332,4 +332,4 @@ app.get('/api/all', (req, res) => {
 
 
 
-app.listen(3001, () => console.log('App listening on port 3001!'));
+app.listen(port, () => console.log('App listening on port ' + port +'!'));
