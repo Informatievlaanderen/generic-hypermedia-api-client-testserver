@@ -4,7 +4,7 @@ const negotiator = require('accept-language-negotiator');
 
 const PAGE_SIZE = 10;
 const port = process.argv.length < 4 ? 3001 : process.argv[3];
-const baseUrl = process.argv.length < 3 ? 'http://localhost:' + port + '/' : process.argv[2];
+const baseUrl = process.argv.length < 3 ? 'http://localhost:' + port : process.argv[2];
 
 app.enable('etag')
 
@@ -13,9 +13,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Expose-Headers", "Link");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    //res.header("Cache-Control", "max-age=604800"); // 1 week
     res.header("Content-Type", "application/ld+json");
-    //res.set('Link', '<' + baseUrl + 'api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation"');
     next();
 });
 
@@ -23,6 +21,7 @@ app.get('/', (req, res) => {
     res.redirect('/api');
 });
 
+//Entrypoint of our dummydata
 app.get('/api', (req, res) => {
     const doc = {
         "@context": [
@@ -42,15 +41,11 @@ app.get('/api', (req, res) => {
         "dc:modified": "2018-07-24"
     };
     res.header("Content-Type", "application/ld+json");
-
-    //Send api documentation link via HTTP header
-    //res.setHeader('Link', '<http://localhost:3001/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation"');
-
-
     res.send(doc);
 })
 ;
 
+//Api documentation information
 app.get('/api/documentation', (req, res) => {
     const doc = {
         "@context": [
@@ -74,8 +69,8 @@ app.get('/api/documentation', (req, res) => {
         "hydra:description": "Lorem ipsum dolor sit amet",
         "dc:issued": "2016-01-10",
         "dc:modified": "2018-07-24",
-        "dc:license": "https://overheid.vlaanderen.be/sites/default/files/documenten/ict-egov/licenties/hergebruik/modellicentie_gratis_hergebruik_v1_0.html",
-        "hydra:entrypoint": "https://localhost:3001/api",
+        "dc:license": "http://example.orglicenties/hergebruik/modellicentie_gratis_hergebruik_v1_0.html",
+        "hydra:entrypoint": baseUrl + "/api",
         "schema:contactPoint": {
             "schema:contactnaam": "Helpdesk",
             "schema:email": "info@example.org",
@@ -121,6 +116,7 @@ app.get('/api/documentation', (req, res) => {
 })
 ;
 
+//Dummydata for PaginationHandler
 app.get('/api/pagination', (req, res) => {
     const doc = {
         "@context": "http://www.w3.org/ns/hydra/context.jsonld",
@@ -141,22 +137,16 @@ app.get('/api/pagination', (req, res) => {
         ]
     }
 
-    //It's possible to only send the headers with the links too!
-    /*res.setHeader('link', '<https://hostname/api/resource?page=4&limit=100>; rel="next",' +
-        '<https://hostname/api/resource?page=50&limit=100>; rel="last",' +
-        '<https://hostname/api/resource?page=2&limit=100>; rel="prev",' +
-        '<https://hostname/api/resource?page=1&limit=100>; rel="first"')*/
-
     res.header("Content-Type", "application/ld+json");
     res.send(doc);
 });
 
+//Dummydata for LanguageHandler
 app.get('/api/language', (req, res) => {
     const headers = req.headers['accept-language'];
     const supportedLanguageTags = [
         'nl-be',
-        'en-US',
-        'fr-CA'
+        'en-US'
     ];
 
     const doc = {
@@ -164,11 +154,12 @@ app.get('/api/language', (req, res) => {
             "label": { "@id": "http://www.w3.org/2000/01/rdf-schema#label", "@container": "@language" }
         },
         "@id": "/api/language/1",
-        "label": {
-            "nl-be": "Gent",
-            "en-us": "Ghent",
-            "fr-CA" : "Gand"
+        "label" : {
+            "nl-be": "België",
+            "en-us": "Belgium",
+            "fr-CA": "Belgique"
         }
+
     }
     res.header("Content-Type", "application/ld+json");
 
@@ -188,23 +179,26 @@ app.get('/api/language', (req, res) => {
     }
 });
 
+//Dummydata for VersioningHandler
 app.get('/api/versioning', (req, res) => {
+    //For now, only link to versionendURL is send back, this is a dummy URL and contains no data.
     if(req.headers['accept-datetime']){
         //Random numb to simulate TEMPORAL or ATEMPORAL versioning
         let numb =  Math.floor(Math.random() * Math.floor(2))
         if(numb === 1){
             //TEMPORAL VERSIONING
             res.setHeader('memento-datetime', req.headers['accept-datetime']);
-            res.setHeader('link', '<http://localhost:3001/api/versionedURL/Temporal>; rel=timegate');
+            res.setHeader('link', '<' + baseUrl + '/api/versionedURL/Temporal>; rel=timegate');
         } else {
             //ATEMPORAL VERSIONING
-            res.setHeader('link', '<http://localhost:3001/api/versionedURL/Atemporal>; rel=alternate')
+            res.setHeader('link', '<' + baseUrl + '/api/versionedURL/Atemporal>; rel=alternate')
         }
     }
     res.header("Content-Type", "application/ld+json");
     res.end();
 });
 
+//All of the information above put together (most of it)
 app.get('/api/all', (req, res) => {
     let linkHeader = '';
 
@@ -242,19 +236,25 @@ app.get('/api/all', (req, res) => {
             }
         ],
         "@id": "/api/all",
-        "@type": "EntryPoint, Distribution",
-        //"hydra:apiDocumentation": "/documentation",
+        "@type": ["EntryPoint", "Distribution"],
         "dc:issued": "2016-01-10",
         "dc:modified": "2018-07-24",
-        "next": "/api/resource?page=4",
-        "last": "/api/resource?page=50",
-        "first": "/api/resource",
-        "previous": "/api/resource?page=2",
         "label": {
             "nl-be": "Gent",
             "en-us": "Ghent",
             "fr-CA" : "Gand"
-        }
+        },
+        "operation": [
+            {
+                "@type": "Operation",
+                "method": "PUT"
+            },
+            {
+                "@type": "Operation",
+                "method": "POST",
+                "expects": "schema:Event"
+            }
+        ]
     };
 
     //VERSIONING
@@ -264,30 +264,34 @@ app.get('/api/all', (req, res) => {
         if(numb === 1){
             //TEMPORAL VERSIONING
             res.setHeader('memento-datetime', req.headers['accept-datetime']);
-            linkHeader += '<http://localhost:3001/api/versionedURL/Temporal>; rel=timegate,';
-            //res.setHeader('link', '<http://localhost:3001/api/versionedURL/Temporal>; rel=timegate');
+            linkHeader += '<' + baseUrl + '/api/versionedURL/Temporal>; rel=timegate,';
         } else {
             //ATEMPORAL VERSIONING
-            //res.setHeader('link', '<http://localhost:3001/api/versionedURL/Atemporal>; rel=alternate')
-            linkHeader += '<http://localhost:3001/api/versionedURL/Atemporal>; rel=alternate,';
+            linkHeader += '<' + baseUrl + '/api/versionedURL/Atemporal>; rel=alternate,';
         }
     }
-    linkHeader += '<http://localhost:3001/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation"';
+    //Api documentation URL via Link header
+    linkHeader += '<http://tw06v036.ugent.be/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation",';
+
+    //Pagination links also for Link header
+    linkHeader += '<http://example.org/dummy?page=4&limiet=100>; rel="prev",';
+    linkHeader += '<http://example.org/dummy?page=6&limiet=100>; rel="next",';
+    linkHeader += '<http://example.org/dummy?page=1&limiet=100>; rel="first",';
+    linkHeader += '<http://example.org/dummy?page=20&limiet=100>; rel="last"';
 
     res.header("Content-Type", "application/ld+json");
     res.setHeader('link', linkHeader);
     res.send(doc);
 });
 
-/*app.get('/api/personen', (req, res) => {
-    //RDF
+//Dummydata for FullTextSearchHandler
+app.get('/api/fullTextSearch', (req, res) => {
     const doc = {
         "@context": "http://www.w3.org/ns/hydra/context.jsonld",
         "@type": "IriTemplate",
-        "@id": "http://localhost:3001/api/personen",
-        "http://rdfs.org/ns/void#subset": "http://localhost:3001/api/personen?filter=Test",
+        "@id": baseUrl + "/api/fullTextSearch",
         "search": {
-            "template": "http://localhost:3001/api/personen/zoek{?filter}",
+            "template": baseUrl + "/api/fullTextSearch/search{?filter}",
             "variableRepresentation": "BasicRepresentation",
             "mapping": [
                 {
@@ -300,39 +304,77 @@ app.get('/api/all', (req, res) => {
         }
     }
     res.setHeader('content-type', 'application/ld+json');
-
     res.send(doc);
-});*/
+});
 
-/*app.get('/api/personen/zoek', (req, res) => {
-    const doc ={
-        test: 'ok'
+//Entrypoint for URL with parameters.
+app.get('/api/fullTextSearch/search', (req, res) => {
+    const doc = {
+        "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+        "@type": "IriTemplate",
+        "@id": "http://api.example.com/personen",
+        "http://rdfs.org/ns/void#subset": "http://api.example.com/personen?filter=Bob",
+        "search": {
+            "template": "http://api.example.com/personen{?filter}",
+            "variableRepresentation": "BasicRepresentation",
+            "mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                    "variable": "filter",
+                    "property": "hydra:freetextQuery",
+                    "required": true
+                }
+            ]
+        }
     }
-    res.setHeader('content-type', 'application/json');
 
-    // const doc = {
-    //     "@context": "http://www.w3.org/ns/hydra/context.jsonld",
-    //     "@type": "IriTemplate",
-    //     "@id": "http://localhost:3001/api/personen",
-    //     "http://rdfs.org/ns/void#subset": "http://localhost:3001/api/personen?filter=Test",
-    //     "search": {
-    //         "template": "http://localhost:3001/api/personen{?filter}",
-    //         "variableRepresentation": "BasicRepresentation",
-    //         "mapping": [
-    //             {
-    //                 "@type": "IriTemplateMapping",
-    //                 "variable": "filter",
-    //                 "property": "hydra:freetextQuery",
-    //                 "required": true
-    //             }
-    //         ]
-    //     }
-    // }
-    //res.setHeader('content-type', 'application/ld+json');
-    res.send(doc);
-})*/
+    const json = {
+        'Status' : 'Full Text Search ok, format is JSON'
+    }
 
+    let numb =  Math.floor(Math.random() * Math.floor(2))
+    if(numb === 1){
+        res.setHeader('content-type', 'application/json');
+        res.send(JSON.stringify(json));
+    } else {
+        res.setHeader('content-type', 'application/ld+json');
+        res.send(doc);
+    }
+});
 
+//Dummydata for CRUDHandler
+app.get('/api/crud/1', (req,res) => {
 
+    const doc = {
+        "@context": [
+            "http://www.w3.org/ns/hydra/context.jsonld",
+            {
+                "sh": "http://www.w3.org/ns/shacl#",
+                "schema": "https://schema.org/"
+            }
+        ],
+        "@id": "/api/crud/1",
+        "title": "Een voorbeeld resource",
+        "description": "Deze resource kan verwijderd worden met een HTTP DELETE request of aangepast worden met een HTTP PUT request",
+        "operation": [
+            {
+                "@type": "Operation",
+                "method": "GET"
+            },
+            {
+                "@type": "Operation",
+                "method": "PUT",
+                "expects": "schema:Event"
+            },
+            {
+                "@type": "Operation",
+                "method": "POST",
+                "expects": "schema:Event"
+            }
+        ]
+    }
+    res.setHeader('Content-type', 'application/ld+json');
+res.send(doc);
+});
 
 app.listen(port, () => console.log('App listening on port ' + port +'!'));
