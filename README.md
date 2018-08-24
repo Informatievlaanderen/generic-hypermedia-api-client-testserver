@@ -19,7 +19,7 @@ Het is ook mogelijk om een eigen baseURI en poort mee te geven. In volgend voorb
 > node app.js localhost 4000
 ```
 
-In de console krijg je nu te zien `App listening on port 4000`.
+In de console wordt `App listening on port 4000` getoond.
 
 ## Endpoints
 
