@@ -289,9 +289,9 @@ app.get('/api/fullTextSearch', (req, res) => {
     const doc = {
         "@context": "http://www.w3.org/ns/hydra/context.jsonld",
         "@type": "IriTemplate",
-        "@id": baseUrl + "/api/fullTextSearch",
+        "@id": "/api/fullTextSearch",
         "search": {
-            "template": baseUrl + "/api/fullTextSearch/search{?filter}",
+            "template": "http://tw06v036.ugent.be/api/fullTextSearch/search{?filter}",
             "variableRepresentation": "BasicRepresentation",
             "mapping": [
                 {
@@ -302,7 +302,7 @@ app.get('/api/fullTextSearch', (req, res) => {
                 }
             ]
         }
-    }
+    };
     res.setHeader('content-type', 'application/ld+json');
     res.send(doc);
 });
