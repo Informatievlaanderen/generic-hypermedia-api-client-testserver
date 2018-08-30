@@ -23,12 +23,29 @@ In de console wordt `App listening on port 4000` getoond.
 
 ## Endpoints
 
+#### Testen MetadataHandler
 * `/api` = entrypoint.
-* `/api/documentation` = dummydata voor MetadataHandler.
-* `/api/pagination` = dummydata voor PaginationHandler.
-* `/api/language` = dummydata voor LanguageHandler.
-* `/api/versioning` = dummydata voor VersioningHandler
+* `/api/documentation`
+* `/api/all`
+
+#### Testen PaginationHandler
+* `/api/pagination` 
+* `/api/all`
+
+#### Testen LanguageHandler
+* `/api/language`
+* `/api/all`
+
+#### Testen VersioningHandler
+* `/api/versioning` = dummydata voor VersioningHandler.
+* `/api/all`
+
+#### Testen FullTextSearchHandler
 * `/api/fullTextSearch` = dummydata voor FullTextSearchHandler
-* `/api/crud/1` = dummydata voor CRUDHandler
-* `/api/all` = dummydata voor MetadataHandler, PaginationHandler, LanguageHandler en VersioningHandler. Dit endpoint kan gebruikt worden om _meerdere_ bouwblokken samen te testen.
+
+#### Testen CRUDHandler
+* `/api/crud/1`
+* `/api/crud/2`
+* `/api/crud/3`
+* `/api/crud/4`
 
