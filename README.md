@@ -24,7 +24,7 @@ In de console wordt `App listening on port 4000` getoond.
 ## Endpoints
 
 #### Testen MetadataHandler
-* `/api` = entrypoint.
+* `/api` = **entrypoint**.
 * `/api/documentation`
 * `/api/all`
 
@@ -37,11 +37,11 @@ In de console wordt `App listening on port 4000` getoond.
 * `/api/all`
 
 #### Testen VersioningHandler
-* `/api/versioning` = dummydata voor VersioningHandler.
+* `/api/versioning`
 * `/api/all`
 
 #### Testen FullTextSearchHandler
-* `/api/fullTextSearch` = dummydata voor FullTextSearchHandler
+* `/api/fullTextSearch`
 
 #### Testen CRUDHandler
 * `/api/crud/1`
