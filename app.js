@@ -347,7 +347,7 @@ app.get('/api/fullTextSearch', (req, res) => {
         "@type": "IriTemplate",
         "@id": "/api/fullTextSearch",
         "search": {
-            "template": "http://localhost:3001/api/fullTextSearch/search{?filter}",
+            "template": baseUrl + "/api/fullTextSearch/search{?filter}",
             "variableRepresentation": "BasicRepresentation",
             "mapping": [
                 {
