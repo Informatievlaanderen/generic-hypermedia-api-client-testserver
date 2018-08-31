@@ -13,6 +13,8 @@ Open een command-line interface en navigeer naar de folder. Daar voer je volgend
 
 Het programma verwacht de _baseURI_ waarop de server zal draaien, bijvoorbeeld `http://example.org`. Ook de poort waarop de server toegankelijk is moet worden meegegeven. Indien geen _baseURI_ of poort wordt meegegeven, dan wordt default `localhost` ingesteld als baseURI. De poort staat default `3001` ingesteld.
 
+Het commando `npm install` moet enkel de **eerste** keer uitgevoerd worden. 
+
 ```
 > node app.js http://example.org 5000
 > node app.js 
