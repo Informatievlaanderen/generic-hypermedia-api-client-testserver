@@ -8,18 +8,17 @@ Open een command-line interface en navigeer naar de folder. Daar voer je volgend
 
 ```
 > npm install
-> node app.js
+> node app.js   baseURI   port
 ```
 
-In de console krijg je nu te zien `App listening on port 3001`. Wanneer de applicatie een volgende keer opgestart dient te worden, moet enkel `node app.js` uitgevoerd worden.
-
-Het is ook mogelijk om een eigen baseURI en poort mee te geven. In volgend voorbeeld wordt als baseURI `localhost` meegegeven en als poort `4000` :
+Het programma verwacht de _baseURI_ waarop de server zal draaien, bijvoorbeeld `http://example.org`. Ook de poort waarop de server toegankelijk is moet worden meegegeven. Indien geen _baseURI_ of poort wordt meegegeven, dan wordt default `localhost` ingesteld als baseURI. De poort staat default `3001` ingesteld.
 
 ```
-> node app.js localhost 4000
+> node app.js http://example.org 5000
+> node app.js 
 ```
 
-In de console wordt `App listening on port 4000` getoond.
+In het **eerste** geval zal de _baseURI_ = `http:/example.org` en de _port_ = `5000`. In het **tweede** geval zal de _baseURI_ = `localhost` en de _port_ = `3001`. In de console verschijnt bij success `App listening in port 'PORT'`, waar 'PORT' zal ingevuld worden door de _port_ die werd meegegeven of `3001` als dat niet gedaan werd.
 
 ## Endpoints
 
