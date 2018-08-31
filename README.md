@@ -31,26 +31,27 @@ Voor meer uitleg hoe de server precies werkt, zie de [Wiki-pagina](https://githu
 Hieronder wordt een overzicht gegeven welke endpoints per handler gebruikt kunnen worden om deze te testen:
 
 #### MetadataHandler
-* `/api` = **entrypoint**.
-* `/api/documentation`
-* `/api/all`
+* [/api](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Entrypoint) = **entrypoint**.
+* [/api/documentation](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/API-documentation-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
 #### PaginationHandler
-* `/api/pagination` 
-* `/api/all`
+* [/api/pagination](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Pagination-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
 #### LanguageHandler
-* `/api/language`
-* `/api/all`
+* [/api/language](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Language-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
 #### VersioningHandler
-* `/api/versioning`
-* `/api/all`
+* [/api/versioning](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Versioning-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
 #### FullTextSearchHandler
-* `/api/fullTextSearch`
+* [/api/fullTextSearch](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Full-Text-Search-data)
 
 #### CRUDHandler
+Voor meer info zie [Wiki voor CRUD data](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/CRUD-data).
 * `/api/crud/1`
 * `/api/crud/2`
 * `/api/crud/3`
