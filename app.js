@@ -200,10 +200,10 @@ app.get('/api/versioning', (req, res) => {
         if(numb === 1){
             //TEMPORAL VERSIONING
             res.setHeader('memento-datetime', req.headers['accept-datetime']);
-            res.setHeader('link', '<' + baseUrl + '/api/atemporalVersioning>; rel=timegate');
+            res.setHeader('link', '<' + baseUrl + '/api/temporalVersioning>; rel=timegate');
         } else {
             //ATEMPORAL VERSIONING
-            res.setHeader('link', '<' + baseUrl + '/api/temporalVersioning>; rel=alternate')
+            res.setHeader('link', '<' + baseUrl + '/api/atemporalVersioning>; rel=alternate')
         }
     }
     res.end();
