@@ -412,7 +412,7 @@ app.get('/api/crud/1', (req,res) => {
         ],
         "@id": "/api/crud/1",
         "title": "Een voorbeeld resource",
-        "description": "Deze resource kan verwijderd worden met een HTTP DELETE request of aangepast worden met een HTTP PUT request",
+        "description": "Deze resource kan opgevraagd worden met HTTP GET request, aangepast of aangemaakt worden met een HTTP PUT request.",
         "operation": [
             {
                 "@type": "Operation",
@@ -422,21 +422,16 @@ app.get('/api/crud/1', (req,res) => {
                 "@type": "Operation",
                 "method": "PUT",
                 "expects": "schema:Event"
-            },
-            {
-                "@type": "Operation",
-                "method": "POST",
-                "expects": "schema:Event"
             }
         ]
     };
 
-    let numb =  Math.floor(Math.random() * Math.floor(4))
+    let numb =  Math.floor(Math.random() * Math.floor(4));
     if(numb < 3){
         res.setHeader('Content-type', 'application/ld+json');
         res.send(doc);
     } else {
-        res.setHeader('Allow', 'GET,PUT,POST');
+        res.setHeader('Allow', 'GET,PUT');
         res.send('');
     }
 });
@@ -451,9 +446,9 @@ app.get('/api/crud/2', (req,res) => {
                 "schema": "https://schema.org/"
             }
         ],
-        "@id": "/api/crud/1",
+        "@id": "/api/crud/2",
         "title": "Een voorbeeld resource",
-        "description": "Deze resource kan verwijderd worden met een HTTP DELETE request of aangepast worden met een HTTP PUT request",
+        "description": "Deze resource kan gedeeltelijk geupdated worden met een HTTP PATCH request of opgevraagd worden met een HTTP GET request.",
         "operation": [
             {
                 "@type": "Operation",
@@ -467,12 +462,12 @@ app.get('/api/crud/2', (req,res) => {
         ]
     };
 
-    let numb =  Math.floor(Math.random() * Math.floor(4))
+    let numb =  Math.floor(Math.random() * Math.floor(4));
     if(numb < 3){
         res.setHeader('Content-type', 'application/ld+json');
         res.send(doc);
     } else {
-        res.setHeader('Allow', 'GET,PUT,POST');
+        res.setHeader('Allow', 'GET,PATCH');
         res.send('');
     }
 });
@@ -487,13 +482,13 @@ app.get('/api/crud/3', (req,res) => {
                 "schema": "https://schema.org/"
             }
         ],
-        "@id": "/api/crud/1",
+        "@id": "/api/crud/3",
         "title": "Een voorbeeld resource",
-        "description": "Deze resource kan verwijderd worden met een HTTP DELETE request of aangepast worden met een HTTP PUT request",
+        "description": "Deze resource kan aangemaakt worden met een HTTP POST request of de metadat kan ervan opgevraagd worden met een HTTP HEAD request.",
         "operation": [
             {
                 "@type": "Operation",
-                "method": "GET"
+                "method": "POST"
             },
             {
                 "@type": "Operation",
@@ -502,12 +497,12 @@ app.get('/api/crud/3', (req,res) => {
         ]
     };
 
-    let numb =  Math.floor(Math.random() * Math.floor(4))
+    let numb =  Math.floor(Math.random() * Math.floor(4));
     if(numb < 3){
         res.setHeader('Content-type', 'application/ld+json');
         res.send(doc);
     } else {
-        res.setHeader('Allow', 'GET,PUT,POST');
+        res.setHeader('Allow', 'POST,HEAD');
         res.send('');
     }
 });
@@ -522,9 +517,9 @@ app.get('/api/crud/4', (req,res) => {
                 "schema": "https://schema.org/"
             }
         ],
-        "@id": "/api/crud/1",
+        "@id": "/api/crud/4",
         "title": "Een voorbeeld resource",
-        "description": "Deze resource kan verwijderd worden met een HTTP DELETE request of aangepast worden met een HTTP PUT request",
+        "description": "Deze resource kan opgevraagd worden met een HTTP GET request of verwijderd worden met een HTTP DELETE request.",
         "operation": [
             {
                 "@type": "Operation",
@@ -538,12 +533,12 @@ app.get('/api/crud/4', (req,res) => {
         ]
     };
 
-    let numb =  Math.floor(Math.random() * Math.floor(4))
+    let numb =  Math.floor(Math.random() * Math.floor(4));
     if(numb < 3){
         res.setHeader('Content-type', 'application/ld+json');
         res.send(doc);
     } else {
-        res.setHeader('Allow', 'GET,PUT,POST');
+        res.setHeader('Allow', 'GET,DELETE');
         res.send('');
     }
 });
