@@ -22,6 +22,10 @@ Het commando `npm install` moet enkel de **eerste** keer uitgevoerd worden.
 
 In het **eerste** geval zal de _baseURI_ = `http:/example.org` en de _port_ = `5000`. In het **tweede** geval zal de _baseURI_ = `localhost` en de _port_ = `3001`. In de console verschijnt bij success `App listening in port 'PORT'`, waar 'PORT' zal ingevuld worden door de _port_ die werd meegegeven of `3001` als dat niet gedaan werd.
 
+## Werking server
+
+Voor meer uitleg hoe de server precies werkt, zie de [Wiki-pagina](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki).
+
 ## Endpoints
 
 Hieronder wordt een overzicht gegeven welke endpoints per handler gebruikt kunnen worden om deze te testen:
