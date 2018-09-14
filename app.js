@@ -325,7 +325,7 @@ app.get('/api/all', (req, res) => {
         }
     }
     //Api documentation URL via Link header
-    linkHeader += '<http://tw06v036.ugent.be/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation",';
+    linkHeader += '<' + baseUrl + '/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation",';
 
     //Pagination links also for Link header
     linkHeader += '<http://example.org/dummy?page=4&limiet=100>; rel="prev",';
