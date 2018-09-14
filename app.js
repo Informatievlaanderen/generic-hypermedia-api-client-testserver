@@ -404,7 +404,7 @@ app.get('/api/crud/1', (req,res) => {
 
     const doc = {
         "@context": [
-            "https://www.markus-lanthaler.com/hydra/core"f,
+            "https://www.markus-lanthaler.com/hydra/core",
             {
                 "sh": "http://www.w3.org/ns/shacl#",
                 "schema": "https://schema.org/"
