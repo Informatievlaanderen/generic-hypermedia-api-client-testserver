@@ -8,42 +8,50 @@ Open een command-line interface en navigeer naar de folder. Daar voer je volgend
 
 ```
 > npm install
-> node app.js
+> node app.js   baseURI   port
 ```
 
-In de console krijg je nu te zien `App listening on port 3001`. Wanneer de applicatie een volgende keer opgestart dient te worden, moet enkel `node app.js` uitgevoerd worden.
+Het programma verwacht de _baseURI_ waarop de server zal draaien, bijvoorbeeld `http://example.org`. Ook de poort waarop de server toegankelijk is moet worden meegegeven. Indien geen _baseURI_ of poort wordt meegegeven, dan wordt default `localhost` ingesteld als baseURI. De poort staat default `3001` ingesteld.
 
-Het is ook mogelijk om een eigen baseURI en poort mee te geven. In volgend voorbeeld wordt als baseURI `localhost` meegegeven en als poort `4000` :
+Het commando `npm install` moet enkel de **eerste** keer uitgevoerd worden. 
 
 ```
-> node app.js localhost 4000
+> node app.js http://example.org 5000
+> node app.js 
 ```
 
-In de console wordt `App listening on port 4000` getoond.
+In het **eerste** geval zal de _baseURI_ = `http:/example.org` en de _port_ = `5000`. In het **tweede** geval zal de _baseURI_ = `localhost` en de _port_ = `3001`. In de console verschijnt bij success `App listening in port 'PORT'`, waar 'PORT' zal ingevuld worden door de _port_ die werd meegegeven of `3001` als dat niet gedaan werd.
+
+## Werking server
+
+Voor meer uitleg hoe de server precies werkt, zie de [Wiki-pagina](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki).
 
 ## Endpoints
 
-#### Testen MetadataHandler
-* `/api` = **entrypoint**.
-* `/api/documentation`
-* `/api/all`
+Hieronder wordt een overzicht gegeven welke endpoints per handler gebruikt kunnen worden om deze te testen:
 
-#### Testen PaginationHandler
-* `/api/pagination` 
-* `/api/all`
+#### MetadataHandler
+* [/api](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Entrypoint) = **entrypoint**.
+* [/api/documentation](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/API-documentation-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
-#### Testen LanguageHandler
-* `/api/language`
-* `/api/all`
+#### PaginationHandler
+* [/api/pagination](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Pagination-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
-#### Testen VersioningHandler
-* `/api/versioning`
-* `/api/all`
+#### LanguageHandler
+* [/api/language](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Language-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
-#### Testen FullTextSearchHandler
-* `/api/fullTextSearch`
+#### VersioningHandler
+* [/api/versioning](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Versioning-data)
+* [/api/all](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Combination-of-data)
 
-#### Testen CRUDHandler
+#### FullTextSearchHandler
+* [/api/fullTextSearch](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/Full-Text-Search-data)
+
+#### CRUDHandler
+Voor meer info zie [Wiki voor CRUD data](https://github.com/Informatievlaanderen/generic-hypermedia-api-client-testserver/wiki/CRUD-data).
 * `/api/crud/1`
 * `/api/crud/2`
 * `/api/crud/3`
