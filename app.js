@@ -127,7 +127,7 @@ app.get('/api/pagination', (req, res) => {
     const doc = {
         "@context": "https://www.markus-lanthaler.com/hydra/core",
         "@id": "/api/pagination",
-        "@type": "PartialCollection",
+        "@type": "PartialCollectionView",
         "next": "/api/resource?page=4",
         "last": "/api/resource?page=50",
         "first": "/api/resource",
