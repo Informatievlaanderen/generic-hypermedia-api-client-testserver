@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 app.get('/api', (req, res) => {
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             "https://raw.githubusercontent.com/SEMICeu/DCAT-AP/master/releases/1.1/dcat-ap_1.1.jsonld",
             {
                 "hydra": "http://www.w3.org/ns/hydra/core#",
@@ -53,7 +53,7 @@ app.get('/api', (req, res) => {
 app.get('/api/documentation', (req, res) => {
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             "https://raw.githubusercontent.com/SEMICeu/DCAT-AP/master/releases/1.1/dcat-ap_1.1.jsonld",
 
             {
@@ -125,9 +125,9 @@ app.get('/api/documentation', (req, res) => {
 ///////////////////////////////
 app.get('/api/pagination', (req, res) => {
     const doc = {
-        "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+        "@context": "https://www.markus-lanthaler.com/hydra/core",
         "@id": "/api/pagination",
-        "@type": "PartialCollection",
+        "@type": "PartialCollectionView",
         "next": "/api/resource?page=4",
         "last": "/api/resource?page=50",
         "first": "/api/resource",
@@ -281,7 +281,7 @@ app.get('/api/all', (req, res) => {
 
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             "https://raw.githubusercontent.com/SEMICeu/DCAT-AP/master/releases/1.1/dcat-ap_1.1.jsonld",
             {
                 "hydra": "http://www.w3.org/ns/hydra/core#",
@@ -325,7 +325,7 @@ app.get('/api/all', (req, res) => {
         }
     }
     //Api documentation URL via Link header
-    linkHeader += '<http://tw06v036.ugent.be/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation",';
+    linkHeader += '<' + baseUrl + '/api/documentation>; rel="http://www.w3.org/ns/hydra/core#apiDocumentation",';
 
     //Pagination links also for Link header
     linkHeader += '<http://example.org/dummy?page=4&limiet=100>; rel="prev",';
@@ -343,7 +343,7 @@ app.get('/api/all', (req, res) => {
 ///////////////////////////////
 app.get('/api/fullTextSearch', (req, res) => {
     const doc = {
-        "@context": "http://www.w3.org/ns/hydra/context.jsonld",
+        "@context": "https://www.markus-lanthaler.com/hydra/core",
         "@type": "IriTemplate",
         "@id": "/api/fullTextSearch",
         "search": {
@@ -369,7 +369,7 @@ app.get('/api/fullTextSearch/search', (req, res) => {
         name = req.query.filter;
     }
     const doc = {
-        "@context":["http://www.w3.org/ns/hydra/context.jsonld",
+        "@context":["https://www.markus-lanthaler.com/hydra/core",
             {
                 "schema" : "http://schema.org/"
             }
@@ -404,7 +404,7 @@ app.get('/api/crud/1', (req,res) => {
 
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             {
                 "sh": "http://www.w3.org/ns/shacl#",
                 "schema": "https://schema.org/"
@@ -440,7 +440,7 @@ app.get('/api/crud/2', (req,res) => {
 
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             {
                 "sh": "http://www.w3.org/ns/shacl#",
                 "schema": "https://schema.org/"
@@ -476,7 +476,7 @@ app.get('/api/crud/3', (req,res) => {
 
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             {
                 "sh": "http://www.w3.org/ns/shacl#",
                 "schema": "https://schema.org/"
@@ -511,7 +511,7 @@ app.get('/api/crud/4', (req,res) => {
 
     const doc = {
         "@context": [
-            "http://www.w3.org/ns/hydra/context.jsonld",
+            "https://www.markus-lanthaler.com/hydra/core",
             {
                 "sh": "http://www.w3.org/ns/shacl#",
                 "schema": "https://schema.org/"
